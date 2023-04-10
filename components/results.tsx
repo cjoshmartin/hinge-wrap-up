@@ -1,78 +1,233 @@
-import { useEffect } from "react";
-import BarChart from "./charts/BarChart";
-import PieChart from "./charts/PieChart";
+import html2canvas from "html2canvas";
+import moment, { MomentInput } from "moment";
+import { PropsWithChildren, useMemo } from "react";
+
+interface HeaderProps {
+  username: string;
+  startDate: MomentInput;
+  endDate: MomentInput;
+}
+
+function Header(props: HeaderProps) {
+  const startDate = useMemo(() => moment(props.startDate), [props.startDate]);
+  const endDate = useMemo(() => moment(props.endDate), [props.endDate]);
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <h2
+        style={{
+          marginBottom: "0",
+        }}
+      >
+        {props.username}'s Hinge Wrap
+      </h2>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          gap: "8px",
+        }}
+      >
+        <p>{startDate.format("LL")}</p>
+        <p>-</p>
+        <p>
+          {endDate.format("LL")} ({endDate.diff(startDate, "months")} Months)
+        </p>
+      </div>
+    </div>
+  );
+}
+
+interface ContentAreaProps {
+  title: string;
+  isReversed?: boolean;
+}
+
+function Numbers(props: PropsWithChildren<any>) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "#000000",
+        color: "#fff",
+        padding: "1rem 3rem",
+        ...props.style,
+      }}
+    >
+      {props.children}
+    </div>
+  );
+}
+
+function ContentArea(props: PropsWithChildren<ContentAreaProps>) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: props.isReversed ? "row-reverse" : "row",
+        gap: "5rem",
+        margin: "18px",
+        marginBottom: 0,
+        alignContent: "space-between",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <h2
+        style={{
+          flexGrow: "2",
+        }}
+      >
+        {props.title}
+      </h2>
+      <span
+        style={{
+          height: "8px",
+          width: "100%",
+          backgroundColor: "#000",
+          flexGrow: "1",
+        }}
+      />
+      <Numbers
+        style={{
+          flexGrow: "3",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {props.children}
+      </Numbers>
+    </div>
+  );
+}
+
+function PercentageFact(props: PropsWithChildren<any>) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: props.isReversed ? "row-reverse" : "row",
+        alignItems: "center",
+        margin: "18px 46px",
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "#614051",
+          color: "#fff",
+          padding: "3rem",
+          borderRadius: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        {props.children}
+      </div>
+    </div>
+  );
+}
+
+function Result(props: PropsWithChildren<any>) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        alignContent: "center",
+        justifyContent: "center",
+        textAlign: "center",
+      }}
+    >
+      <Numbers>{props.children}</Numbers>
+    </div>
+  );
+}
+
+function Footer(props: any) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "flex-end",
+        margin: "0 18px",
+        height: "100%",
+      }}
+    >
+      <p>HingeWrapper.com</p>
+      <p>Made by @cjoshmartin</p>
+    </div>
+  );
+}
 
 export default function Results(props: any) {
-  useEffect(() => {
-    console.log(props);
-  }, []);
+  function onDowload() {
+    html2canvas(document.querySelector("#hinge-wrapped")).then((canvas) => {
+      const link = document.createElement("a");
+      link.download = `hinge-wrapped.png`;
+      link.href = canvas.toDataURL();
+      link.click();
+    });
+  }
   return (
-    <>
-      <h1>Results</h1>
-      <section>
-        <div>
-          <h2>Likes</h2>
-          <div>
-            <p>
-              you have sent a total <b>{props.numberOfLikes} likes</b>
-            </p>
-          </div>
-          <BarChart
-            title="Type of Likes Sent"
-            labels={["Likes without Comments", "Likes with Comments"]}
-            data={[
-              props.numberOfLikes - props.numberOfComments,
-              props.numberOfComments,
-            ]}
-            colors={["rgb(255, 99, 132)", "rgb(255, 205, 86)"]}
-          />
-
-          <PieChart
-            title="Your Comment to Like Ratio"
-            labels={["Percentage with Comments", "Perentage WITHOUT Comments"]}
-            data={[props.ratio.comment2like, 100 - props.ratio.comment2like]}
-            colors={["rgb(255, 99, 132)", "rgb(255, 205, 86)"]}
-          />
-        </div>
-
-        <div>
-          <h2>Matches</h2>
-          <p>you have received: {props.numberOfMatches} matches</p>
-          <p>Your Match to Like ratio is: {props.ratio.match2like}%</p>
-          {/* <p>Your Match to Comment ratio is: {props.ratio.match2comment}%</p> */}
-          {props.numberOfUnMatches > 0 && (
-            <p>
-              Additionally, {props.numberOfUnMatches} of the people you matched
-              with unmatch you or you removed them! WOW!
-            </p>
-          )}
-        </div>
-        <div>
-          <h2>Conversations</h2>
-          <p>You held a conversation with {props.chats.total} people</p>
-          <p>
-            Your Conversation to Match ratio is:{" "}
-            {props.ratio.conversation2match}%
-          </p>
-          {/* <p>
-            Out of those conversations, you talked long enough in{" "}
-            {props.metUps.HingleIsAsking} of them. That Hinge thinks you should
-            meet those {props.metUps.HingleIsAsking} people.
-          </p> */}
-          <p>
-            You actually meet up with {props.metUps.actualMet} of the people you
-            talked to (but this is also self reported){" "}
-          </p>
-        </div>
-        <div>
-          <h2>Your Type</h2>
-          <PieChart
-            labels={["Your Type", "Not Your Type"]}
-            data={[props.metUps.wasYourType, props.metUps.notYourType]}
-            colors={["rgb(255, 99, 132)", "rgb(255, 205, 86)"]}
-          />
-        </div>
-      </section>
-    </>
+    <section>
+      <div
+        style={{
+          width: "800px",
+          height: "1250px",
+          border: "3px solid #D3D3D3",
+          borderRadius: "1%",
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+        }}
+        id="hinge-wrapped"
+      >
+        <Header
+          username="Josh"
+          startDate={props.dateWhenYouStartedDating}
+          endDate={props.endDate}
+        />
+        <ContentArea title="Likes Sent">
+          <h2>{props.numberOfLikes} Likes</h2>
+          <h2>
+            {props.ratio.comment2like}% Likes sent <br /> with Comments
+          </h2>
+        </ContentArea>
+        <PercentageFact>
+          <h2>
+            {props.ratio.match2like}% of your <br /> Likes Turned <br /> Matches
+          </h2>
+        </PercentageFact>
+        <ContentArea title="Conversations had" isReversed={true}>
+          <h2>{props.numberOfLikes} Likes</h2>
+        </ContentArea>
+        <PercentageFact isReversed={true}>
+          <h2>
+            {props.ratio.conversation2match}% of <br /> your Matches <br />{" "}
+            Turned Long
+            <br />
+            Conversations{" "}
+          </h2>
+        </PercentageFact>
+        <Result>
+          <h2>{props.metUps.actualMet} Dates</h2>
+          <small>
+            ( Last Date on {moment(props.metUps.lastDate).format("MMMM Do")} )
+          </small>
+        </Result>
+        <Footer />
+      </div>
+      <button onClick={onDowload}>Download Image of Wrap</button>
+    </section>
   );
 }

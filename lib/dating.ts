@@ -4,10 +4,7 @@ function addToSum(metric?: any) {
   return !!metric ? 1 : 0;
 }
 
-export function HingleDateMatcher(
-  data: any,
-  dateWhenYouStartedDating = new Date("2023-01-14")
-) {
+export function HingleDateMatcher(data: any, dateWhenYouStartedDating: Date) {
   let numberOfLikes = 0;
   let numberOfComments = 0;
   let numberOfMatches = 0;
@@ -20,6 +17,7 @@ export function HingleDateMatcher(
     notYourType: 0,
     lastDate: dateWhenYouStartedDating,
   };
+  let endDate = dateWhenYouStartedDating;
 
   for (let i = 0; i < data.length; i++) {
     const currentData = data[i];
@@ -30,6 +28,10 @@ export function HingleDateMatcher(
       if (dateWhenYouStartedDating > DateOfLiking) {
         continue;
       }
+      if (DateOfLiking > endDate) {
+        endDate = DateOfLiking;
+      }
+
       // @ts-ignore
       if (like[0]?.comment) {
         numberOfComments += 1;
@@ -90,6 +92,7 @@ export function HingleDateMatcher(
     numberOfUnMatches,
     chats,
     metUps,
-    dateWhenYouStartedDating
+    dateWhenYouStartedDating,
+    endDate,
   };
 }

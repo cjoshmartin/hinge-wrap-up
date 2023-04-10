@@ -24,6 +24,7 @@ const apiRoute = nextConnect({
 apiRoute.use(upload.single("file"));
 
 apiRoute.post((req, res) => {
+  console.log("Yo: ", req.body);
   const file = req?.file;
   if (file?.mimetype !== "application/zip") {
     return res.status(400).send({ message: "Wrong file type" });
@@ -46,8 +47,11 @@ apiRoute.post((req, res) => {
   const entry = zipEntries[0];
   const buf = entry.getData();
   const match_data = JSON.parse(buf.toString());
+  const startDate = req?.body?.startDate
+    ? new Date(req?.body?.startDate)
+    : undefined;
 
-  const data = HingleDateMatcher(match_data)
+  const data = HingleDateMatcher(match_data, startDate);
 
   res.status(200).json({ data });
 });
