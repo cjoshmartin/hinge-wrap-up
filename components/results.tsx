@@ -74,7 +74,7 @@ function ContentArea(props: PropsWithChildren<ContentAreaProps>) {
       style={{
         display: "flex",
         flexDirection: props.isReversed ? "row-reverse" : "row",
-        gap: "5rem",
+        // gap: "5rem",
         margin: "18px",
         marginBottom: 0,
         alignContent: "space-between",
@@ -93,14 +93,6 @@ function ContentArea(props: PropsWithChildren<ContentAreaProps>) {
       >
         {props.title}
       </h2>
-      <span
-        style={{
-          height: "8px",
-          width: "100%",
-          backgroundColor: "#000",
-          flexGrow: "1",
-        }}
-      />
       <Numbers
         style={{
           flexGrow: "3",
