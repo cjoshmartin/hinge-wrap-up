@@ -191,8 +191,7 @@ export default function Results(props: any) {
     <section>
       <div
         style={{
-          width: "800px",
-          // height: "1480px",
+          maxWidth: "800px",
           border: "3px solid #D3D3D3",
           borderRadius: "1%",
           display: "flex",
