@@ -80,12 +80,15 @@ function ContentArea(props: PropsWithChildren<ContentAreaProps>) {
         alignContent: "space-between",
         justifyContent: "space-between",
         alignItems: "center",
+        backgroundColor: "#000",
         ...props.style,
       }}
     >
       <h2
         style={{
           flexGrow: "2",
+          color: "#FFF",
+          padding: "3rem",
         }}
       >
         {props.title}
@@ -117,15 +120,14 @@ function PercentageFact(props: PropsWithChildren<any>) {
         display: "flex",
         flexDirection: props.isReversed ? "row-reverse" : "row",
         alignItems: "center",
-        margin: "18px 46px",
+        margin: "18px",
+        backgroundColor: "#614051",
       }}
     >
       <div
         style={{
-          backgroundColor: "#614051",
           color: "#fff",
           padding: "3rem",
-          borderRadius: "100%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -149,7 +151,11 @@ function Result(props: PropsWithChildren<any>) {
         textAlign: "center",
       }}
     >
-      <Numbers>{props.children}</Numbers>
+      <Numbers 
+      style={{
+        padding: '3rem'
+      }}
+      >{props.children}</Numbers>
     </div>
   );
 }
@@ -186,7 +192,7 @@ export default function Results(props: any) {
       <div
         style={{
           width: "800px",
-          height: "1400px",
+          // height: "1480px",
           border: "3px solid #D3D3D3",
           borderRadius: "1%",
           display: "flex",
@@ -226,7 +232,7 @@ export default function Results(props: any) {
           <h2>{props.chats.total} Matches</h2>
         </ContentArea>
         <Result>
-          <h2>{props.metUps.actualMet} Dates</h2>
+          <h2 style={{ margin: 0 }}>{props.metUps.actualMet} Dates</h2>
           <small>
             ( Last Date on {moment(props.metUps.lastDate).format("MMMM Do")} )
           </small>
