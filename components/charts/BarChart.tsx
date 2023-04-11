@@ -20,7 +20,7 @@ export default function BarChart(props: BarInterface) {
           labels: ["Likes without Comments", "Likes with Comments"],
           datasets: [
             {
-              axis: "x",
+              // axis: "x",
               data: props.data,
               backgroundColor: props.colors,
             },

@@ -1,5 +1,6 @@
 import AdmZip from "adm-zip";
 import multer from "multer";
+import { NextApiRequest, NextApiResponse } from "next";
 import nextConnect from "next-connect";
 import { HingleDateMatcher } from "../../lib/dating";
 
@@ -13,18 +14,21 @@ export const config = {
 };
 
 const apiRoute = nextConnect({
-  onError(error, req, res) {
+  onError(error, req: NextApiRequest, res: NextApiResponse<any>) {
     res.status(501).json({ error: `There was an error! ${error.message}` });
   },
-  onNoMatch(req, res) {
+  onNoMatch(req: NextApiRequest, res: NextApiResponse<any>) {
     res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
   },
 });
 
 apiRoute.use(upload.single("file"));
 
-apiRoute.post((req, res) => {
-  console.log("Yo: ", req.body);
+interface MulterRequest extends NextApiRequest {
+  file?: any;
+}
+
+apiRoute.post((req: MulterRequest, res: NextApiResponse<any>) => {
   const file = req?.file;
   if (file?.mimetype !== "application/zip") {
     return res.status(400).send({ message: "Wrong file type" });

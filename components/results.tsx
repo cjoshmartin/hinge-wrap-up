@@ -1,3 +1,4 @@
+import { Button } from "antd";
 import html2canvas from "html2canvas";
 import moment, { MomentInput } from "moment";
 import { PropsWithChildren, useMemo } from "react";
@@ -47,6 +48,7 @@ function Header(props: HeaderProps) {
 interface ContentAreaProps {
   title: string;
   isReversed?: boolean;
+  style?: any
 }
 
 function Numbers(props: PropsWithChildren<any>) {
@@ -78,6 +80,7 @@ function ContentArea(props: PropsWithChildren<ContentAreaProps>) {
         alignContent: "space-between",
         justifyContent: "space-between",
         alignItems: "center",
+        ...props.style
       }}
     >
       <h2
@@ -183,7 +186,7 @@ export default function Results(props: any) {
       <div
         style={{
           width: "800px",
-          height: "1250px",
+          height: "1400px",
           border: "3px solid #D3D3D3",
           borderRadius: "1%",
           display: "flex",
@@ -208,8 +211,8 @@ export default function Results(props: any) {
             {props.ratio.match2like}% of your <br /> Likes Turned <br /> Matches
           </h2>
         </PercentageFact>
-        <ContentArea title="Conversations had" isReversed={true}>
-          <h2>{props.numberOfLikes} Likes</h2>
+        <ContentArea title="Matches Recived" isReversed={true}>
+          <h2>{props.numberOfMatches} Matches</h2>
         </ContentArea>
         <PercentageFact isReversed={true}>
           <h2>
@@ -219,6 +222,9 @@ export default function Results(props: any) {
             Conversations{" "}
           </h2>
         </PercentageFact>
+        <ContentArea title="Conversations Had" style={{marginBottom: '18px'}}>
+          <h2>{props.chats.total} Matches</h2>
+        </ContentArea>
         <Result>
           <h2>{props.metUps.actualMet} Dates</h2>
           <small>
@@ -227,7 +233,19 @@ export default function Results(props: any) {
         </Result>
         <Footer />
       </div>
-      <button onClick={onDowload}>Download Image of Wrap</button>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          margin: "18px",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Button onClick={onDowload} type="primary">
+          Download Image
+        </Button>
+      </div>
     </section>
   );
 }

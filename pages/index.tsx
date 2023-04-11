@@ -1,13 +1,7 @@
+import { Button, DatePicker, Form, Input } from "antd";
 import { useState } from "react";
 import Results from "../components/results";
-import styles from "../styles/Home.module.css";
-
-import { Button, DatePicker, Form, Input } from "antd";
-
-import { CategoryScale } from "chart.js";
-import Chart from "chart.js/auto";
-
-Chart.register(CategoryScale);
+import Layout from "../layout/layout";
 
 const __data = {
   numberOfLikes: 320,
@@ -58,7 +52,7 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.container}>
+    <Layout>
       {!matchData && (
         <div>
           <h1>Hingle Data</h1>
@@ -90,66 +84,22 @@ export default function Home() {
       {matchData && (
         <div>
           <div>
-            <h1>file has been successful</h1>
-            <button onClick={() => setMatchData(undefined)}>
-              Upload another File
-            </button>
+            <Button type="link" onClick={() => setMatchData(undefined)}>
+              {"<< Upload Other Data"}
+            </Button>
           </div>
 
           <Results {...matchData} />
         </div>
       )}
 
-      <style jsx>{`
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        footer img {
-          margin-left: 0.5rem;
-        }
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-decoration: none;
-          color: inherit;
-        }
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
+      <div>
+        <h2>Privacy Policy</h2>
+        <p>
+          No data from the content you upload is stored or collected anywhere.
+          Additionally, your data is not share with any third party.
+        </p>
+      </div>
+    </Layout>
   );
 }
