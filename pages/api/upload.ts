@@ -33,29 +33,28 @@ apiRoute.post((req: MulterRequest, res: NextApiResponse<any>) => {
   if (file?.mimetype !== "application/zip") {
     return res.status(400).send({ message: "Wrong file type" });
   }
-  const file_looking_for = ["matches.json"];
+  const file_looking_for = ["matches.json", "user.json"];
 
   const zip = new AdmZip(file?.buffer);
   const zipEntries = zip
     .getEntries()
     .filter(({ entryName }) =>
       file_looking_for.some((file) => entryName.includes(file))
-    );
-  //   zipEntries.forEach((entry) => {
-  //     const buf = entry.getData();
-  //     const match_data = JSON.parse(buf.toString());
+    )
+    .reduce((acc, entry) => {
+      const buf = entry.getData();
+      acc[entry.name] = JSON.parse(buf.toString());
+      return acc;
+    }, {});
 
-  //     console.log(HingleDateMatcher(match_data))
-  //   });
-
-  const entry = zipEntries[0];
-  const buf = entry.getData();
-  const match_data = JSON.parse(buf.toString());
   const startDate = req?.body?.startDate
     ? new Date(req?.body?.startDate)
     : undefined;
 
-  const data = HingleDateMatcher(match_data, startDate);
+  const data = {
+    ...HingleDateMatcher(zipEntries["matches.json"], startDate),
+    first_name: zipEntries["user.json"]?.profile.first_name
+  }
 
   res.status(200).json({ data });
 });

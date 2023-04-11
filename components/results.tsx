@@ -48,7 +48,7 @@ function Header(props: HeaderProps) {
 interface ContentAreaProps {
   title: string;
   isReversed?: boolean;
-  style?: any
+  style?: any;
 }
 
 function Numbers(props: PropsWithChildren<any>) {
@@ -80,7 +80,7 @@ function ContentArea(props: PropsWithChildren<ContentAreaProps>) {
         alignContent: "space-between",
         justifyContent: "space-between",
         alignItems: "center",
-        ...props.style
+        ...props.style,
       }}
     >
       <h2
@@ -196,7 +196,7 @@ export default function Results(props: any) {
         id="hinge-wrapped"
       >
         <Header
-          username="Josh"
+          username={props.first_name}
           startDate={props.dateWhenYouStartedDating}
           endDate={props.endDate}
         />
@@ -222,7 +222,7 @@ export default function Results(props: any) {
             Conversations{" "}
           </h2>
         </PercentageFact>
-        <ContentArea title="Conversations Had" style={{marginBottom: '18px'}}>
+        <ContentArea title="Conversations Had" style={{ marginBottom: "18px" }}>
           <h2>{props.chats.total} Matches</h2>
         </ContentArea>
         <Result>
