@@ -254,15 +254,16 @@ export default function Results(props: any) {
             />
             <p>
               You really like to send likes at{" "}
-              {getHour(
-                props.hoursOfLikesSent.indexOf(
-                  Math.max(...props.hoursOfLikesSent)
-                )
-              )}.
+              <b>
+                {getHour(
+                  props.hoursOfLikesSent.indexOf(
+                    Math.max(...props.hoursOfLikesSent)
+                  )
+                )}</b>.
             </p>
           </div>
         </div>
-        <ContentArea title="Matches Recived" isReversed={true}>
+        <ContentArea title="Matches Received" isReversed={true}>
           <h2>{props.numberOfMatches} Matches</h2>
         </ContentArea>
         <div
@@ -288,7 +289,11 @@ export default function Results(props: any) {
             />
             <p>
               your matches and Your really <br /> like to talk at{" "}
-              {getHour(props.chats.freq.indexOf(Math.max(...props.chats.freq)))}
+              <b>
+                {getHour(
+                  props.chats.freq.indexOf(Math.max(...props.chats.freq))
+                )}
+              </b>
               .
             </p>
           </div>
