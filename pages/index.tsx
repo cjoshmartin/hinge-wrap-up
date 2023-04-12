@@ -2,7 +2,7 @@ import { Button, DatePicker, Form, Input } from "antd";
 import { useState } from "react";
 import Results from "../components/results";
 import Layout from "../layout/layout";
-import __data from '../lib/sample_data.json'
+import __data from "../lib/sample_data.json";
 
 export default function Home() {
   const [file, setFile] = useState(null);
@@ -32,38 +32,44 @@ export default function Home() {
         <div>
           <h1>Hingle Data</h1>
           <div style={{ margin: "3rem 0" }}>
-            <p>
-              A little Scared? look at my data first and see what it is like
-              before you upload yours...
-              <br />
-            </p>
-            <Button onClick={() => setMatchData(__data)}>
-              Check Out Josh's Hinge Wrapped
-            </Button>
-          </div>
-
-          <Form
-            onFinish={onSubmit}
-            autoComplete="off"
-            size="large"
-            style={{ maxWidth: 350 }}
-          >
-            <Form.Item label="The Date you started dating" name="startDate">
-              <DatePicker />
-            </Form.Item>
-            <Form.Item
-              label="Hinge Zip File"
-              name="zip_file"
-              rules={[{ required: true }]}
-            >
-              <Input type="file" onChange={onFileChange} />
-            </Form.Item>
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-              <Button type="primary" htmlType="submit">
-                Submit
+            <h2>A little Scared?</h2>
+            <div>
+              <p>
+                look at my data first and see what it is like before you upload
+                yours...
+                <br />
+              </p>
+              <Button onClick={() => setMatchData(__data)}>
+                Check Out Josh's Hinge Wrapped
               </Button>
-            </Form.Item>
-          </Form>
+            </div>
+          </div>
+          <div>
+            <h2>Upload your Data</h2>
+
+            <Form
+              onFinish={onSubmit}
+              autoComplete="off"
+              size="large"
+              style={{ maxWidth: 350 }}
+            >
+              <Form.Item label="The Date you started dating" name="startDate">
+                <DatePicker />
+              </Form.Item>
+              <Form.Item
+                label="Hinge Zip File"
+                name="zip_file"
+                rules={[{ required: true }]}
+              >
+                <Input type="file" onChange={onFileChange} />
+              </Form.Item>
+              <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                <Button type="primary" htmlType="submit">
+                  Submit
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
         </div>
       )}
       {matchData && (
@@ -78,11 +84,13 @@ export default function Home() {
         </div>
       )}
 
-      <div>
+      <div style={{ maxWidth: "500px" }}>
         <h2>Privacy Policy</h2>
         <p>
           No data from the content you upload is stored or collected anywhere.
-          Additionally, your data is not share with any third party.
+          Additionally, your data is not share with any third party. Everything
+          is processed in memory and then thrown away as soon as you refresh the
+          page.
         </p>
       </div>
     </Layout>
