@@ -1,10 +1,29 @@
 import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
 
 interface BarInterface {
   title?: string;
   labels: string[];
   data: (string | number)[];
-  colors: string[];
+  colors?: string[];
 }
 
 export default function BarChart(props: BarInterface) {
@@ -12,12 +31,12 @@ export default function BarChart(props: BarInterface) {
     <div
       className="bar-chart-container"
       style={{
-        height: "500px",
+        // height: "500px",
       }}
     >
       <Bar
         data={{
-          labels: ["Likes without Comments", "Likes with Comments"],
+          labels: props.labels, 
           datasets: [
             {
               // axis: "x",

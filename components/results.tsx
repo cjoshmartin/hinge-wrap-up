@@ -2,6 +2,8 @@ import { Button } from "antd";
 import html2canvas from "html2canvas";
 import moment, { MomentInput } from "moment";
 import { PropsWithChildren, useMemo } from "react";
+import BarChart from "./charts/BarChart";
+import RadarChart from "./charts/RadarChart";
 
 interface HeaderProps {
   username: string;
@@ -105,6 +107,9 @@ function ContentArea(props: PropsWithChildren<ContentAreaProps>) {
   );
 }
 
+const getHour = (i) =>
+  `${(i % 12) + 1} ${i + 1 < 12 || i + 1 > 23 ? "am" : "pm"}`;
+
 function PercentageFact(props: PropsWithChildren<any>) {
   return (
     <div
@@ -143,11 +148,13 @@ function Result(props: PropsWithChildren<any>) {
         textAlign: "center",
       }}
     >
-      <Numbers 
-      style={{
-        padding: '3rem'
-      }}
-      >{props.children}</Numbers>
+      <Numbers
+        style={{
+          padding: "3rem",
+        }}
+      >
+        {props.children}
+      </Numbers>
     </div>
   );
 }
@@ -164,7 +171,7 @@ function Footer(props: any) {
         height: "100%",
       }}
     >
-      <p>HingeWrapper.com</p>
+      <p>hinge-wrap-up.vercel.app</p>
       <p>Made by @cjoshmartin</p>
     </div>
   );
@@ -197,30 +204,110 @@ export default function Results(props: any) {
           startDate={props.dateWhenYouStartedDating}
           endDate={props.endDate}
         />
+        <div
+          style={{
+            padding: "18px",
+          }}
+        >
+          <BarChart
+            labels={["Likes", "Matches", "Conversations", "Dates", "Unmatches"]}
+            data={[
+              props.numberOfLikes,
+              props.numberOfMatches,
+              props.chats.total,
+              props.metUps.actualMet,
+              props.numberOfUnMatches,
+            ]}
+          />
+        </div>
         <ContentArea title="Likes Sent">
           <h2>{props.numberOfLikes} Likes</h2>
           <h2>
             {props.ratio.comment2like}% Likes sent <br /> with Comments
           </h2>
         </ContentArea>
-        <PercentageFact>
-          <h2>
-            {props.ratio.match2like}% of your <br /> Likes Turned <br /> Matches
-          </h2>
-        </PercentageFact>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          <PercentageFact>
+            <h2>
+              {props.ratio.match2like}% of your <br /> Likes Turned <br />{" "}
+              Matches
+            </h2>
+          </PercentageFact>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "8px",
+            }}
+          >
+            <RadarChart
+              title="Number of Likes sent"
+              labels={props.hoursOfLikesSent.map((_, i) => getHour(i))}
+              data={props.hoursOfLikesSent}
+            />
+            <p>
+              You really like to send likes at{" "}
+              {getHour(
+                props.hoursOfLikesSent.indexOf(
+                  Math.max(...props.hoursOfLikesSent)
+                )
+              )}.
+            </p>
+          </div>
+        </div>
         <ContentArea title="Matches Recived" isReversed={true}>
           <h2>{props.numberOfMatches} Matches</h2>
         </ContentArea>
-        <PercentageFact isReversed={true}>
-          <h2>
-            {props.ratio.conversation2match}% of <br /> your Matches <br />{" "}
-            Turned Long
-            <br />
-            Conversations{" "}
-          </h2>
-        </PercentageFact>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "8px",
+              marginLeft: "18px",
+            }}
+          >
+            <RadarChart
+              title="Number of messages"
+              labels={props.chats.freq.map((_, i) => getHour(i))}
+              data={props.chats.freq}
+            />
+            <p>
+              your matches and Your really <br /> like to talk at{" "}
+              {getHour(props.chats.freq.indexOf(Math.max(...props.chats.freq)))}
+              .
+            </p>
+          </div>
+          <PercentageFact isReversed={true}>
+            <h2>
+              {props.ratio.conversation2match}% of <br /> your Matches <br />{" "}
+              Turned Long
+              <br />
+              Conversations{" "}
+            </h2>
+          </PercentageFact>
+        </div>
         <ContentArea title="Conversations Had" style={{ marginBottom: "18px" }}>
-          <h2>{props.chats.total} Matches</h2>
+          <h2>
+            {props.chats.total}, on average sending
+            <br />
+            {Math.round(props.chats.average)} messages <br />
+            per conversation
+          </h2>
         </ContentArea>
         <Result>
           <h2 style={{ margin: 0 }}>{props.metUps.actualMet} Dates</h2>

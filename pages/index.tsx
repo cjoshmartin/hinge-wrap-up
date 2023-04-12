@@ -2,34 +2,7 @@ import { Button, DatePicker, Form, Input } from "antd";
 import { useState } from "react";
 import Results from "../components/results";
 import Layout from "../layout/layout";
-
-const __data = {
-  numberOfLikes: 320,
-  numberOfComments: 155,
-  numberOfMatches: 22,
-  ratio: {
-    comment2like: "48.44",
-    match2like: "6.88",
-    match2comment: "14.19",
-    conversation2match: "54.55",
-  },
-  numberOfUnMatches: 0,
-  chats: {
-    total: 12,
-    longest: 0,
-    average: 0,
-  },
-  metUps: {
-    actualMet: 2,
-    HingleIsAsking: 3,
-    wasYourType: 1,
-    notYourType: 1,
-    lastDate: "2023-03-14T02:51:08.000Z",
-  },
-  dateWhenYouStartedDating: "2023-01-14T06:53:37.000Z",
-  endDate: "2023-03-24T20:47:32.000Z",
-  first_name: "Josh",
-};
+import __data from '../lib/sample_data.json'
 
 export default function Home() {
   const [file, setFile] = useState(null);

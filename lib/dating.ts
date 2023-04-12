@@ -9,7 +9,7 @@ export function HingleDateMatcher(data: any, dateWhenYouStartedDating: Date) {
   let numberOfComments = 0;
   let numberOfMatches = 0;
   let numberOfUnMatches = 0;
-  let chats = { total: 0, longest: 0, average: 0 };
+  let chats = { total: 0, totalOfLongConv: 0, longest: 0, average: 0, freq: new Array(24).fill(0) };
   let metUps = {
     actualMet: 0,
     HingleIsAsking: 0,
@@ -17,6 +17,8 @@ export function HingleDateMatcher(data: any, dateWhenYouStartedDating: Date) {
     notYourType: 0,
     lastDate: dateWhenYouStartedDating,
   };
+  const hoursOfLikesSent = new Array(24).fill(0);
+
   let endDate = dateWhenYouStartedDating;
 
   for (let i = 0; i < data.length; i++) {
@@ -31,6 +33,9 @@ export function HingleDateMatcher(data: any, dateWhenYouStartedDating: Date) {
       if (DateOfLiking > endDate) {
         endDate = DateOfLiking;
       }
+
+      const hour = DateOfLiking.getHours();
+      hoursOfLikesSent[hour]++;
 
       // @ts-ignore
       if (like[0]?.comment) {
@@ -54,7 +59,17 @@ export function HingleDateMatcher(data: any, dateWhenYouStartedDating: Date) {
     const chat = currentData?.chats;
     if (chat) {
       const lengthOfChat = chat.length;
-      chats.total += lengthOfChat > 1 ? 1 : 0;
+      
+      chats.totalOfLongConv += lengthOfChat > 1 ? 1 : 0;
+      chats.total++;
+      const longest = chats.longest;
+      chats.longest = lengthOfChat > longest ? lengthOfChat : longest;
+      chats.average += lengthOfChat;
+
+      chat.forEach(({timestamp}) => {
+        chats.freq[new Date(timestamp).getHours()]++;
+      })
+
     }
 
     const met = currentData?.we_met;
@@ -78,6 +93,7 @@ export function HingleDateMatcher(data: any, dateWhenYouStartedDating: Date) {
       }
     }
   }
+  chats.average = chats.average / chats.total;
 
   return {
     numberOfLikes,
@@ -87,12 +103,13 @@ export function HingleDateMatcher(data: any, dateWhenYouStartedDating: Date) {
       comment2like: ((numberOfComments / numberOfLikes) * 100).toFixed(2), // comment to like ratio
       match2like: ((numberOfMatches / numberOfLikes) * 100).toFixed(2), // match to like ratio
       match2comment: ((numberOfMatches / numberOfComments) * 100).toFixed(2),
-      conversation2match: ((chats.total / numberOfMatches) * 100).toFixed(2),
+      conversation2match: ((chats.totalOfLongConv / numberOfMatches) * 100).toFixed(2),
     },
     numberOfUnMatches,
     chats,
     metUps,
     dateWhenYouStartedDating,
     endDate,
+    hoursOfLikesSent,
   };
 }
