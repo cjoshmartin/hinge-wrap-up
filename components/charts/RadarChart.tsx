@@ -41,9 +41,6 @@ interface RadarChartInterface {
               },
             ],
           }}
-          options={{
-            chartArea: { backgroundColor: "red" },
-          }}
         />
       </div>
     );
