@@ -4,6 +4,7 @@ import Results from "../components/results";
 import Layout from "../layout/layout";
 import __data from "../lib/sample_data.json";
 
+import JSZip from "jszip";
 export default function Home() {
   const [file, setFile] = useState(null);
   const [matchData, setMatchData] = useState<any>();
@@ -15,11 +16,32 @@ export default function Home() {
     }
   };
   const onSubmit = async (event) => {
-    const body = new FormData();
-    body.append("startDate", event.startDate);
-    body.append("file", file);
+    // more files !
+    const new_zip = new JSZip();
+    const data = await new_zip.loadAsync(file).then(function (zip) {
+      // you now have every files contained in the loaded zip
+      console.log(zip);
+      //@ts-ignore
+      const matchJSON = zip.files["export/matches.json"]._data.compressedContent;
+      const matchData = JSON.parse(Buffer.from(matchJSON).toString("utf8"));
+      //@ts-ignore
+      const userJSON = zip.files["export/user.json"]._data.compressedContent;
+      const userData = JSON.parse(Buffer.from(userJSON).toString("utf8"));
+      return {
+        matchData,
+        userData,
+      };
+    });
+
+    const body = JSON.stringify({
+      startDate: event.startDate,
+      ...data,
+    });
     const response = await fetch("/api/upload", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body,
     }).then((res) => res.json());
     console.log(response.data);
