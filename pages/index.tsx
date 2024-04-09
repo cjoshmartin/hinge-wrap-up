@@ -18,20 +18,14 @@ export default function Home() {
   const onSubmit = async (event) => {
     // more files !
     const new_zip = new JSZip();
-    const data = await new_zip.loadAsync(file).then(function (zip) {
-      // you now have every files contained in the loaded zip
-      console.log(zip);
-      //@ts-ignore
-      const matchJSON = zip.files["export/matches.json"]._data.compressedContent;
-      const matchData = JSON.parse(Buffer.from(matchJSON).toString("utf8"));
-      //@ts-ignore
-      const userJSON = zip.files["export/user.json"]._data.compressedContent;
-      const userData = JSON.parse(Buffer.from(userJSON).toString("utf8"));
+    const data = await new_zip.loadAsync(file)
+    .then( async (zip) => {
       return {
-        matchData,
-        userData,
-      };
-    });
+        matchData: JSON.parse(await zip.file("export/matches.json").async('string')),
+        userData: JSON.parse(await zip.file("export/user.json").async('string'))
+      }
+      
+    })
 
     const body = JSON.stringify({
       startDate: event.startDate,

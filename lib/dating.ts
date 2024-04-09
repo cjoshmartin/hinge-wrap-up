@@ -38,7 +38,7 @@ export function HingleDateMatcher(data: any, dateWhenYouStartedDating: Date) {
       hoursOfLikesSent[hour]++;
 
       // @ts-ignore
-      if (like[0]?.comment) {
+      if (like[0]?.like[0]?.comment) {
         numberOfComments += 1;
       }
 

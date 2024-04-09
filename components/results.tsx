@@ -317,7 +317,7 @@ export default function Results(props: any) {
         <Result>
           <h2 style={{ margin: 0 }}>{props.metUps.actualMet} Dates</h2>
           <small>
-            ( Last Date on {moment(props.metUps.lastDate).format("MMMM Do")} )
+             Last date was {moment(props.metUps.lastDate).fromNow()} ({moment(props.metUps.lastDate).format("MMMM Do, YYYY")})
           </small>
         </Result>
         <Footer />
