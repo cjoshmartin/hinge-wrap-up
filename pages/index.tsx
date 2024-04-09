@@ -22,7 +22,8 @@ export default function Home() {
     .then( async (zip) => {
       return {
         matchData: JSON.parse(await zip.file("export/matches.json").async('string')),
-        userData: JSON.parse(await zip.file("export/user.json").async('string'))
+        userData: JSON.parse(await zip.file("export/user.json").async('string')),
+        images: JSON.parse(await zip.file("export/media.json").async('string'))
       }
       
     })

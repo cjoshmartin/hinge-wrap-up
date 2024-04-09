@@ -9,6 +9,7 @@ interface HeaderProps {
   username: string;
   startDate: MomentInput;
   endDate: MomentInput;
+  image: string;
 }
 
 function Header(props: HeaderProps) {
@@ -18,30 +19,41 @@ function Header(props: HeaderProps) {
     <div
       style={{
         display: "flex",
-        flexDirection: "column",
+        flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
+        gap: '1rem',
+        padding: '1rem'  
       }}
     >
-      <h2
-        style={{
-          marginBottom: "0",
-        }}
-      >
-        {props.username}'s Hinge Wrap
-      </h2>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          gap: "8px",
-        }}
-      >
-        <p>{startDate.format("LL")}</p>
-        <p>-</p>
-        <p>
-          {endDate.format("LL")} ({endDate.diff(startDate, "months")} Months)
-        </p>
+      <img 
+      src={props.image} 
+      alt="" width={100} height={100}
+      style={{
+        borderRadius: '3rem'
+      }} 
+      />
+      <div>
+        <h2
+          style={{
+            marginBottom: "0",
+          }}
+        >
+          {props.username}'s Hinge Wrap
+        </h2>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            gap: "8px",
+          }}
+        >
+          <p>{startDate.format("LL")}</p>
+          <p>-</p>
+          <p>
+            {endDate.format("LL")} ({endDate.diff(startDate, "months")} Months)
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -203,6 +215,7 @@ export default function Results(props: any) {
           username={props.first_name}
           startDate={props.dateWhenYouStartedDating}
           endDate={props.endDate}
+          image={props.image}
         />
         <div
           style={{
