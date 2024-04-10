@@ -91,11 +91,13 @@ export default function Home() {
       )}
       {matchData && (
         <div>
-          <div>
-            <Button type="link" onClick={() => setMatchData(undefined)}>
+            <Button type="link" onClick={() => setMatchData(undefined)}
+              style={{
+                padding: '1rem'
+              }}
+            >
               {"<< Upload Other Data"}
             </Button>
-          </div>
 
           <Results {...matchData} />
         </div>

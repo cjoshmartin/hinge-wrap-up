@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.19.1",
     "@types/multer": "^1.4.7",
     "adm-zip": "^0.5.10",
     "antd": "^5.4.0",
