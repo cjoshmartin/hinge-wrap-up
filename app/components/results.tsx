@@ -26,6 +26,7 @@ function Header(props: HeaderProps) {
         padding: '1rem'  
       }}
     >
+      {/* eslint-disable-next-line @next/next/no-img-element*/}
       <img 
       src={props.image} 
       alt="" width={100} height={100}
@@ -119,7 +120,7 @@ function ContentArea(props: PropsWithChildren<ContentAreaProps>) {
   );
 }
 
-const getHour = (i) =>
+const getHour = (i: number) =>
   `${(i % 12) + 1} ${i + 1 < 12 || i + 1 > 23 ? "am" : "pm"}`;
 
 function PercentageFact(props: PropsWithChildren<any>) {
@@ -191,6 +192,7 @@ function Footer(props: any) {
 
 export default function Results(props: any) {
   function onDowload() {
+    //@ts-ignore
     html2canvas(document.querySelector("#hinge-wrapped")).then((canvas) => {
       const link = document.createElement("a");
       link.download = `hinge-wrapped.png`;
@@ -262,7 +264,7 @@ export default function Results(props: any) {
           >
             <RadarChart
               title="Number of Likes sent"
-              labels={props.hoursOfLikesSent.map((_, i) => getHour(i))}
+              labels={props.hoursOfLikesSent.map((_:any, i:number) => getHour(i))}
               data={props.hoursOfLikesSent}
             />
             <p>
@@ -297,7 +299,7 @@ export default function Results(props: any) {
           >
             <RadarChart
               title="Number of messages"
-              labels={props.chats.freq.map((_, i) => getHour(i))}
+              labels={props.chats.freq.map((_:any, i:number) => getHour(i))}
               data={props.chats.freq}
             />
             <p>

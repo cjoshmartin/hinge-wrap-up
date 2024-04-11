@@ -1,4 +1,3 @@
-import Layout from "../layout/layout";
 
 const headerStyle: React.CSSProperties = {
   backgroundColor: "inherit",
@@ -7,7 +6,7 @@ const headerStyle: React.CSSProperties = {
 
 export default function About() {
   return (
-    <Layout>
+    <>
       <h2>About Page</h2>
       <p>
         Heavly inspired by{" "}
@@ -20,6 +19,6 @@ export default function About() {
         </a>{" "}
         and Tiktok dating wraps
       </p>
-    </Layout>
+    </>
   );
 }

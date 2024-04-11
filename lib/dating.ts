@@ -66,7 +66,7 @@ export function HingleDateMatcher(data: any, dateWhenYouStartedDating: Date) {
       chats.longest = lengthOfChat > longest ? lengthOfChat : longest;
       chats.average += lengthOfChat;
 
-      chat.forEach(({timestamp}) => {
+      chat.forEach(({timestamp}:any) => {
         chats.freq[new Date(timestamp).getHours()]++;
       })
 
