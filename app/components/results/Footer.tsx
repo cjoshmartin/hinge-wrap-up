@@ -6,7 +6,8 @@ export function Footer(props: any) {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "flex-end",
-        margin: "0 18px",
+        // margin: "0 18px",
+        padding: '1rem',
         height: "100%",
       }}
     >

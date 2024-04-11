@@ -7,7 +7,7 @@ export function PercentageFact(props: PropsWithChildren<any>) {
         display: "flex",
         flexDirection: props.isReversed ? "row-reverse" : "row",
         alignItems: "center",
-        margin: "18px",
+        padding: '1rem',
         backgroundColor: "#614051",
       }}
     >

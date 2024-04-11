@@ -162,15 +162,25 @@ export default function Results(props: any) {
     });
   }
   return (
-    <section>
+    <section
+      style={{
+        width: '100%'
+      }}
+    >
       {/* <div
         className={styles.container} 
         id="hinge-wrapped"
       ></div> */}
+      <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: "repeat(auto-fit, minmax(500px, 1fr))"
+      }}
+      >
       <LikeResults {...props}/>
       <MatchesResults {...props} />
       <DateResults {...props}/>
-      
+      </div>
 
       <div className={styles.downloadButtonContainer} >
         <Button onClick={onDowload} type="primary">

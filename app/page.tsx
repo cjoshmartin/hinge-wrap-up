@@ -113,7 +113,11 @@ export default function Home() {
       >
         <UploadForm matchData={matchData} setMatchData={setMatchData} />
         {matchData && (
-          <div>
+          <div
+            style={{
+             width: '100%' 
+            }}
+          >
             <Button
               type="link"
               onClick={() => setMatchData(undefined)}

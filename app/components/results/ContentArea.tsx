@@ -14,7 +14,7 @@ export function ContentArea(props: PropsWithChildren<ContentAreaProps>) {
       style={{
         display: "flex",
         flexDirection: props.isReversed ? "row-reverse" : "row",
-        margin: "18px",
+        // margin: "18px",
         marginBottom: 0,
         alignContent: "space-between",
         justifyContent: "space-between",
@@ -35,7 +35,7 @@ export function ContentArea(props: PropsWithChildren<ContentAreaProps>) {
       <Numbers
         style={{
           flexGrow: "3",
-          whiteSpace: "nowrap",
+          // whiteSpace: "nowrap",
         }}
         isPurple={props.isPurple}
       >
