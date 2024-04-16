@@ -50,20 +50,14 @@ function LikeResults(props: any){
         <ContentArea title="Likes Sent">
           <h3>{props.numberOfLikes} Likes</h3>
           <h4>
-            {props.ratio.comment2like}% Likes sent <br /> with Comments
+            {props.ratio.comment2like}% <br/> Likes sent <br /> with Comments
           </h4>
         </ContentArea>
         <div
           className={styles.halfWidthFact}
         >
-          <PercentageFact>
-            <h3>
-              {props.ratio.match2like}% of your <br /> Likes Turned <br />{" "}
-              Matches
-            </h3>
-          </PercentageFact>
           <div className={styles.graphView} 
-            style={{padding: '1rem'}}
+            style={{marginBottom: '1rem'}}
           >
             <RadarChart
               title="Number of Likes sent"
@@ -80,6 +74,12 @@ function LikeResults(props: any){
                 )}</b>.
             </p>
           </div>
+          <PercentageFact>
+            <h3>
+              {props.ratio.match2like}% of your Likes Turned {" "}
+              Matches
+            </h3>
+          </PercentageFact>
         </div>
       
     </Container>
@@ -175,7 +175,7 @@ export default function Results(props: any) {
       style={{
         display: 'grid',
         gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-        gap: '1rem'
+        gap: '2rem'
       }}
       >
       <LikeResults {...props} id={"hinge-likes"}/>

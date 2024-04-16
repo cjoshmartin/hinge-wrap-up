@@ -1,5 +1,6 @@
 .container{
           max-width: 500px;
+          aspect-ratio: 9/16;
           border: 3px solid #f5f5f5;
           border-radius: 1%;
           display: flex;
@@ -10,14 +11,13 @@
 
 }
 
-.barGraphContainer {
-    padding: 1rem;
-}
+/* .barGraphContainer {
+} */
 
 .halfWidthFact {
 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     /* flex-wrap: wrap; */
     justify-content: space-between;
 }

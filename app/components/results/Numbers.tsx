@@ -8,7 +8,7 @@ export function Numbers(props: PropsWithChildren<any>) {
         flexDirection: "column",
         backgroundColor: props.isPurple ? "#614051" :"#000",
         color: "#fff",
-        padding: "1rem",
+        textAlign: 'right',
         ...props.style,
       }}
     >

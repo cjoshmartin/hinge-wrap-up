@@ -8,11 +8,10 @@ export function Footer(props: any) {
         alignItems: "flex-end",
         // margin: "0 18px",
         padding: '1rem',
-        height: "100%",
       }}
     >
-      <p>hinge-wrap-up.vercel.app</p>
-      <p>Made by @cjoshmartin</p>
+      <p style={{textAlign: 'start'}}>hinge-wrap-up.vercel.app</p>
+      <p style={{textAlign: 'end'}}>Made by @cjoshmartin</p>
     </div>
   );
 }

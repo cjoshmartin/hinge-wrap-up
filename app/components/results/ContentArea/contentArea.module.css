@@ -5,10 +5,10 @@
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
+        padding: 0.5rem;
 }
 
 .header {
     color: #FFF;
-    padding: 1rem;
 
 }

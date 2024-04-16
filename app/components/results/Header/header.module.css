@@ -4,15 +4,13 @@
         justify-content: space-between;
         align-items: center;
         gap: 1rem;
-        /* padding: 1rem; */
-        padding-bottom: 1rem;
-
 }
 .innerContainer {
           display: flex;
           flex-direction:column;
           align-items: center;
           padding: 0.5rem 1rem;
+          padding-bottom: 0;
 
 }
 .innerContainer h2 {
@@ -20,12 +18,15 @@
 }
 
 .datesContainer {
-        display: flex;
-        flex-direction: row;
-        gap: 8px;
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: center;
+        /* display: flex; */
+        /* flex-direction: row; */
+        /* gap: 8px; */
+        /* align-items: center; */
+        /* flex-wrap: wrap; */
+        /* justify-content: center; */
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 1rem;
 }
 .profileImg {
         border-radius: 0.5rem;
