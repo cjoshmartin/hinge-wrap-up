@@ -9,7 +9,7 @@ export function PercentageFact(props: PropsWithChildren<any>) {
         alignItems: "center",
         // padding: '1rem',
         backgroundColor: "#614051",
-        width: '100%'
+        // width: '100%'
       }}
     >
       <div

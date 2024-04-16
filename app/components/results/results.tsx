@@ -89,14 +89,15 @@ function LikeResults(props: any){
 function MatchesResults(props: any) {
   return (
     <Container {...props} title={"Matches and Conversations"}>
-        <ContentArea title="Matches Received" isReversed={true}>
+        <ContentArea title="Matches Received">
           <h2>{props.numberOfMatches} Matches</h2>
         </ContentArea>
         <div
           style={{
             display: "flex",
             flexDirection: "row",
-            flexWrap: 'wrap'
+            flexWrap: 'wrap',
+            // justifyContent: 'space-between'
           }}
         >
           <div

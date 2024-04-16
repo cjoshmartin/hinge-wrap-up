@@ -10,10 +10,10 @@
 .header {
     flex-grow: 2;
     color: #FFF;
-    padding: 3rem;
+    padding: 1rem;
 
 }
 
-.result {
+/* .result {
     flex-grow: 3;
-}
+} */
