@@ -184,8 +184,8 @@ export default function Results(props: any) {
       }}
       >
       <LikeResults {...props} id={"hinge-likes"}/>
-      <MatchesResults {...props} />
-      <DateResults {...props}/>
+      {/* <MatchesResults {...props} />
+      <DateResults {...props}/> */}
       </div>
 
       <div className={styles.downloadButtonContainer} >
