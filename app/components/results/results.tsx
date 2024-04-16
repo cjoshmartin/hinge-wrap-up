@@ -94,12 +94,13 @@ function MatchesResults(props: any) {
           style={{
             display: "flex",
             flexDirection: "row",
+            flexWrap: 'wrap'
           }}
         >
           <div
             className={styles.graphView} 
             style={{
-              marginLeft: "1rem",
+              margin: "1rem",
             }}
           >
             <RadarChart
@@ -177,7 +178,7 @@ export default function Results(props: any) {
         gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))"
       }}
       >
-      <LikeResults {...props}/>
+      {/* <LikeResults {...props}/> */}
       <MatchesResults {...props} />
       <DateResults {...props}/>
       </div>

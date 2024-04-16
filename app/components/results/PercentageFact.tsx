@@ -7,8 +7,9 @@ export function PercentageFact(props: PropsWithChildren<any>) {
         display: "flex",
         flexDirection: props.isReversed ? "row-reverse" : "row",
         alignItems: "center",
-        padding: '1rem',
+        // padding: '1rem',
         backgroundColor: "#614051",
+        width: '100%'
       }}
     >
       <div
