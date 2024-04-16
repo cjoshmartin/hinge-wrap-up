@@ -15,10 +15,7 @@ export function PercentageFact(props: PropsWithChildren<any>) {
       <div
         style={{
           color: "#fff",
-          padding: "3rem",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          'textAlign': 'center',
         }}
       >
         {props.children}

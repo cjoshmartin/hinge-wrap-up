@@ -19,10 +19,11 @@ export default function Header(props: HeaderProps) {
       {/* eslint-disable-next-line @next/next/no-img-element*/}
       {props.image && <img
         src={props.image}
-        alt="" width={100} height={100}
-        style={{
-          borderRadius: '3rem'
-        }} />
+        alt="" 
+        width={150} 
+        height={150}
+        className={styles.profileImg}
+         />
       }
       <div className={styles.innerContainer} >
         <h2

@@ -48,19 +48,19 @@ function LikeResults(props: any){
           />
         </div>
         <ContentArea title="Likes Sent">
-          <h2>{props.numberOfLikes} Likes</h2>
-          <h2>
+          <h3>{props.numberOfLikes} Likes</h3>
+          <h4>
             {props.ratio.comment2like}% Likes sent <br /> with Comments
-          </h2>
+          </h4>
         </ContentArea>
         <div
           className={styles.halfWidthFact}
         >
           <PercentageFact>
-            <h2>
+            <h3>
               {props.ratio.match2like}% of your <br /> Likes Turned <br />{" "}
               Matches
-            </h2>
+            </h3>
           </PercentageFact>
           <div className={styles.graphView} 
             style={{padding: '1rem'}}

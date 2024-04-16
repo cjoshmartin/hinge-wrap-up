@@ -8,12 +8,7 @@
 }
 
 .header {
-    flex-grow: 2;
     color: #FFF;
     padding: 1rem;
 
 }
-
-/* .result {
-    flex-grow: 3;
-} */
