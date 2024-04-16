@@ -1,5 +1,6 @@
 import moment, { MomentInput } from "moment";
 import { useMemo } from "react";
+import styles from './header.module.css'
 
 interface HeaderProps {
   username: string;
@@ -10,20 +11,11 @@ interface HeaderProps {
 }
 
 
-export function Header(props: HeaderProps) {
+export default function Header(props: HeaderProps) {
   const startDate = useMemo(() => moment(props.startDate), [props.startDate]);
   const endDate = useMemo(() => moment(props.endDate), [props.endDate]);
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: '1rem',
-        padding: '1rem'
-      }}
-    >
+    <div className={styles.container}>
       {/* eslint-disable-next-line @next/next/no-img-element*/}
       {props.image && <img
         src={props.image}
@@ -32,13 +24,7 @@ export function Header(props: HeaderProps) {
           borderRadius: '3rem'
         }} />
       }
-      <div 
-        style={{
-          display: 'flex',
-          flexDirection:'column',
-          alignItems: 'center'
-        }}
-      >
+      <div className={styles.innerContainer} >
         <h2
           style={{
             marginBottom: "0",
@@ -46,15 +32,9 @@ export function Header(props: HeaderProps) {
         >
           {props.username}'s Hinge Wrap {props.title &&`- ${props.title}`}
         </h2>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            gap: "8px",
-          }}
-        >
+        <div className={styles.datesContainer}>
           <p>{startDate.format("LL")}</p>
-          <p>-</p>
+          <p>to</p>
           <p>
             {endDate.format("LL")} ({endDate.diff(startDate, "months")} Months)
           </p>

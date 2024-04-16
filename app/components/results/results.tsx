@@ -3,7 +3,7 @@ import html2canvas from "html2canvas";
 import moment from "moment";
 import BarChart from "../charts/BarChart";
 import RadarChart from "../charts/RadarChart";
-import { Header } from "./Header";
+import  Header from "./Header";
 import { ContentArea } from "./ContentArea";
 import { PercentageFact } from "./PercentageFact";
 import { Result } from "./Result";
@@ -174,7 +174,7 @@ export default function Results(props: any) {
       <div
       style={{
         display: 'grid',
-        gridTemplateColumns: "repeat(auto-fit, minmax(500px, 1fr))"
+        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))"
       }}
       >
       <LikeResults {...props}/>

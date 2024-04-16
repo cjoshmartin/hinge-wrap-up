@@ -1,0 +1,26 @@
+.container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+
+}
+.innerContainer {
+          display: flex;
+          flex-direction:column;
+          align-items: center;
+
+}
+
+.datesContainer {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        align-items: center;
+
+}
+.datesContainer p {
+        text-align: center;
+}
