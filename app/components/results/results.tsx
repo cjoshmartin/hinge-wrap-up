@@ -62,7 +62,9 @@ function LikeResults(props: any){
               Matches
             </h2>
           </PercentageFact>
-          <div className={styles.graphView} >
+          <div className={styles.graphView} 
+            style={{padding: '1rem'}}
+          >
             <RadarChart
               title="Number of Likes sent"
               labels={props.hoursOfLikesSent.map((_:any, i:number) => getHour(i))}
@@ -178,7 +180,7 @@ export default function Results(props: any) {
         gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))"
       }}
       >
-      {/* <LikeResults {...props}/> */}
+      <LikeResults {...props}/>
       <MatchesResults {...props} />
       <DateResults {...props}/>
       </div>
