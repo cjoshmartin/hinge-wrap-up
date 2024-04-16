@@ -18,7 +18,7 @@ const getHour = (i: number) =>
 
 function Container(props: any){
   return (
-      <div className={styles.container}>
+      <div className={styles.container} id={props.id}>
         <Header
           username={props.first_name}
           startDate={props.dateWhenYouStartedDating}
@@ -158,7 +158,7 @@ function DateResults(props: any) {
 export default function Results(props: any) {
   function onDowload() {
     //@ts-ignore
-    html2canvas(document.querySelector("#hinge-wrapped")).then((canvas) => {
+    html2canvas(document.querySelector("#hinge-likes")).then((canvas) => {
       const link = document.createElement("a");
       link.download = `hinge-wrapped.png`;
       link.href = canvas.toDataURL();
@@ -171,17 +171,14 @@ export default function Results(props: any) {
         width: '100%'
       }}
     >
-      {/* <div
-        className={styles.container} 
-        id="hinge-wrapped"
-      ></div> */}
       <div
       style={{
         display: 'grid',
-        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))"
+        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+        gap: '1rem'
       }}
       >
-      <LikeResults {...props}/>
+      <LikeResults {...props} id={"hinge-likes"}/>
       <MatchesResults {...props} />
       <DateResults {...props}/>
       </div>
