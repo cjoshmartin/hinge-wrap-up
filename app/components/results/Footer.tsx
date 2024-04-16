@@ -12,7 +12,7 @@ export function Footer(props: any) {
       }}
     >
       <p>hinge-wrap-up.vercel.app</p>
-      <p>Made by @cjoshmartin</p>
+      <p>Made by @cjoshmarti</p>
     </div>
   );
 }
