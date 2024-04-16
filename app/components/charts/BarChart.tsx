@@ -45,7 +45,12 @@ export default function BarChart(props: BarInterface) {
             },
           ],
         }}
+        // updateMode="resize"
+        // redraw={true}
+        height="350px"
         options={{
+          // responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             title: {
               display: !!props.title,
