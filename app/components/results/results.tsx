@@ -35,55 +35,50 @@ function Container(props: any){
 function LikeResults(props: any){
   return (
     <Container {...props} title={"Likes"}>
-        <div className={styles.barGraphContainer}>
-          <BarChart
-            labels={["Likes", "Matches", "Conversations", "Dates", "Unmatches"]}
-            data={[
-              props.numberOfLikes,
-              props.numberOfMatches,
-              props.chats.total,
-              props.metUps.actualMet,
-              props.numberOfUnMatches,
-            ]}
-          />
-        </div>
-        <ContentArea title="Likes Sent">
-          <h3>{props.numberOfLikes} Likes</h3>
-          <h4>
-            {props.ratio.comment2like}% <br/> Likes sent <br /> with Comments
-          </h4>
-        </ContentArea>
-        <div
-          className={styles.halfWidthFact}
-        >
-          <div className={styles.graphView} 
-            style={{marginBottom: '1rem'}}
-          >
-            <RadarChart
-              title="Number of Likes sent"
-              labels={props.hoursOfLikesSent.map((_:any, i:number) => getHour(i))}
-              data={props.hoursOfLikesSent}
-            />
-            <p>
-              You really like to send likes at{" "}
-              <b>
-                {getHour(
-                  props.hoursOfLikesSent.indexOf(
-                    Math.max(...props.hoursOfLikesSent)
-                  )
-                )}</b>.
-            </p>
-          </div>
-          <PercentageFact>
+      <div className={styles.barGraphContainer}>
+        <BarChart
+          labels={["Likes", "Matches", "Conversations", "Dates", "Unmatches"]}
+          data={[
+            props.numberOfLikes,
+            props.numberOfMatches,
+            props.chats.total,
+            props.metUps.actualMet,
+            props.numberOfUnMatches,
+          ]}
+        />
+      </div>
+      <ContentArea title="Likes Sent">
+        <h3>{props.numberOfLikes} Likes</h3>
+        <h4>
+          {props.ratio.comment2like}% <br /> Likes sent <br /> with Comments
+        </h4>
+      </ContentArea>
+      <div className={styles.graphView} style={{ marginBottom: "1rem" }}>
+        <RadarChart
+          title="Number of Likes sent"
+          labels={props.hoursOfLikesSent.map((_: any, i: number) => getHour(i))}
+          data={props.hoursOfLikesSent}
+        />
+        <p>
+          You really like to send likes at{" "}
+          <b>
+            {getHour(
+              props.hoursOfLikesSent.indexOf(
+                Math.max(...props.hoursOfLikesSent)
+              )
+            )}
+          </b>
+          .
+        </p>
+      </div>
+      {/* <PercentageFact>
             <h3>
               {props.ratio.match2like}% of your Likes Turned {" "}
               Matches
             </h3>
-          </PercentageFact>
-        </div>
-      
+          </PercentageFact> */}
     </Container>
-  )
+  );
 }
 
 function MatchesResults(props: any) {
