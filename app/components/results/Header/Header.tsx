@@ -15,7 +15,6 @@ export default function Header(props: HeaderProps) {
   const startDate = useMemo(() => moment(props.startDate), [props.startDate]);
   const endDate = useMemo(() => moment(props.endDate), [props.endDate]);
   return (
-    <div>
       <div className={styles.container}>
         {/* eslint-disable-next-line @next/next/no-img-element*/}
         {props.image && (
@@ -34,9 +33,9 @@ export default function Header(props: HeaderProps) {
             }}
           >
             {props.username}'s Hinge Wrap {props.title && `- ${props.title}`}
+
           </h2>
-        </div>
-      </div>
+
       <div className={styles.datesContainer}>
         <i>
           <small>
@@ -45,6 +44,7 @@ export default function Header(props: HeaderProps) {
           </small>
         </i>
       </div>
-    </div>
+        </div>
+      </div>
   );
 }
