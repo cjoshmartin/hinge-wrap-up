@@ -4,7 +4,7 @@ import moment from "moment";
 import BarChart from "../charts/BarChart";
 import RadarChart from "../charts/RadarChart";
 import  Header from "./Header";
-import { ContentArea } from "./ContentArea";
+import  ContentArea from "./ContentArea";
 import { PercentageFact } from "./PercentageFact";
 import { Result } from "./Result";
 import { Footer } from "./Footer";

@@ -1,0 +1,19 @@
+.container {
+        display: flex;
+        margin-bottom: 0;
+        align-content: space-between;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+}
+
+.header {
+    flex-grow: 2;
+    color: #FFF;
+    padding: 3rem;
+
+}
+
+.result {
+    flex-grow: 3;
+}
