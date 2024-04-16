@@ -158,7 +158,12 @@ function DateResults(props: any) {
 export default function Results(props: any) {
   function onDowload() {
     //@ts-ignore
-    html2canvas(document.querySelector("#hinge-likes")).then((canvas) => {
+    html2canvas(document.querySelector("#hinge-likes"),
+    {
+      useCORS: true
+    }
+  
+  ).then((canvas) => {
       const link = document.createElement("a");
       link.download = `hinge-wrapped.png`;
       link.href = canvas.toDataURL();

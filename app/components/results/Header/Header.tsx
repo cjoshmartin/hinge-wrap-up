@@ -22,7 +22,7 @@ export default function Header(props: HeaderProps) {
             src={props.image}
             alt=""
             width={100}
-            height={150}
+            height={100}
             className={styles.profileImg}
           />
         )}

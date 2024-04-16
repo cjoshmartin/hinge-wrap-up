@@ -32,7 +32,7 @@
         border-radius: 0.5rem;
         border-top-right-radius: 0;
         object-fit: cover;
-        height: 150px;
+        height: 100px;
         /* width: 100px; */
         align-self: flex-start;
 }
