@@ -7,7 +7,7 @@ export function Footer(props: any) {
         justifyContent: "space-between",
         alignItems: "flex-end",
         // margin: "0 18px",
-        padding: '1rem',
+        margin: '1rem',
       }}
     >
       <p style={{textAlign: 'start'}}>hinge-wrap-up.vercel.app</p>
