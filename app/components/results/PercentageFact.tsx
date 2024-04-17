@@ -4,7 +4,7 @@ export function PercentageFact(props: PropsWithChildren<any>) {
   return (
     <div
       style={{
-        padding: '1rem',
+        padding: '0.5rem',
         backgroundColor: "#614051",
       }}
     >

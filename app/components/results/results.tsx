@@ -32,9 +32,10 @@ function Container(props: any){
   );
 }
 
-function LikeResults(props: any){
+function GeneralResults(props: any) {
+
   return (
-    <Container {...props} title={"Likes"}>
+    <Container {...props} title="General">
       <div className={styles.barGraphContainer}>
         <BarChart
           labels={["Likes", "Matches", "Conversations", "Dates", "Unmatches"]}
@@ -47,13 +48,35 @@ function LikeResults(props: any){
           ]}
         />
       </div>
+      <ContentArea title="Statistics" isPurple={true}>
+        <h3>{props.numberOfLikes} Likes</h3>
+        <h4>
+          {props.chats.total} Conversations
+          </h4>
+        <h4>
+          {props.numberOfMatches} Matches
+          </h4>
+        <h4>
+          {props.numberOfMatches} Unmatches
+          </h4>
+        <h4>
+          {props.metUps.actualMet} Dates
+          </h4>
+      </ContentArea>
+    </Container>
+  )
+}
+
+function LikeResults(props: any){
+  return (
+    <Container {...props} title={"Likes"}>
       <ContentArea title="Likes Sent">
         <h3>{props.numberOfLikes} Likes</h3>
         <h4>
           {props.ratio.comment2like}% <br /> Likes sent <br /> with Comments
         </h4>
       </ContentArea>
-      <div className={styles.graphView} style={{ marginBottom: "1rem" }}>
+      <div className={styles.graphView}>
         <RadarChart
           title="Number of Likes sent"
           labels={props.hoursOfLikesSent.map((_: any, i: number) => getHour(i))}
@@ -71,12 +94,12 @@ function LikeResults(props: any){
           .
         </p>
       </div>
-      {/* <PercentageFact>
+      <PercentageFact>
             <h3>
               {props.ratio.match2like}% of your Likes Turned {" "}
               Matches
             </h3>
-          </PercentageFact> */}
+          </PercentageFact>
     </Container>
   );
 }
@@ -178,6 +201,7 @@ export default function Results(props: any) {
         gap: '2rem'
       }}
       >
+      <GeneralResults {...props}/>
       <LikeResults {...props} id={"hinge-likes"}/>
       {/* <MatchesResults {...props} />
       <DateResults {...props}/> */}

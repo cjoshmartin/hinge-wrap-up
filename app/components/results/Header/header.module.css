@@ -18,23 +18,25 @@
 }
 
 .datesContainer {
-        /* display: flex; */
-        /* flex-direction: row; */
-        /* gap: 8px; */
-        /* align-items: center; */
-        /* flex-wrap: wrap; */
-        /* justify-content: center; */
         text-align: center;
-        margin-top: 1rem;
+        /* margin-top: 1rem; */
         font-size: 1rem;
 }
-.profileImg {
+.imageContainer {
         border-radius: 0.5rem;
         border-top-right-radius: 0;
-        object-fit: cover;
-        height: 100px;
-        /* width: 100px; */
         align-self: flex-start;
+        width: 100px;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+}
+.profileImg {
+        object-fit: cover;
+        max-width: inherit;
+        max-height: inherit;
+        height: inherit;
+        width: inherit;
 }
 .datesContainer p {
         text-align: center;
