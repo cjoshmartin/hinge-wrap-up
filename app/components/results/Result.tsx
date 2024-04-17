@@ -17,6 +17,7 @@ export function Result(props: PropsWithChildren<any>) {
         style={{
           padding: "3rem",
         }}
+        {...props}
       >
         {props.children}
       </Numbers>

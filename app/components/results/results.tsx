@@ -10,6 +10,7 @@ import { Result } from "./Result";
 import { Footer } from "./Footer";
 
 import styles from './results.module.css'
+import JSZip from "jszip";
 
 const getHour = (i: number) =>
   `${(i % 12) + 1} ${i + 1 < 12 || i + 1 > 23 ? "am" : "pm"}`;
@@ -49,19 +50,19 @@ function GeneralResults(props: any) {
         />
       </div>
       <ContentArea title="Statistics" isPurple={true}>
-        <h3>{props.numberOfLikes} Likes</h3>
-        <h4>
+        <h4>{props.numberOfLikes} Likes</h4>
+        <h5>
           {props.chats.total} Conversations
-          </h4>
-        <h4>
+          </h5>
+        <h5>
           {props.numberOfMatches} Matches
-          </h4>
-        <h4>
+          </h5>
+        <h5>
           {props.numberOfMatches} Unmatches
-          </h4>
-        <h4>
+          </h5>
+        <h5>
           {props.metUps.actualMet} Dates
-          </h4>
+          </h5>
       </ContentArea>
     </Container>
   )
@@ -104,26 +105,25 @@ function LikeResults(props: any){
   );
 }
 
-function MatchesResults(props: any) {
+function MatchResults(props: any) {
   return (
-    <Container {...props} title={"Matches and Conversations"}>
-        <ContentArea title="Matches Received">
-          <h2>{props.numberOfMatches} Matches</h2>
+    <Container {...props} title={"Matches"}>
+        <Result isPurple>
+          <h3 style={{ margin: 0 }}>Congrats on your {props.numberOfMatches} matches</h3>
+        </Result>
+    </Container>
+  )
+}
+
+function ConversationsResults(props: any) {
+  return (
+    <Container {...props} title={"Conversations"}>
+        <ContentArea title="Conversations">
+          <h4>{props.chats.total} Conversations</h4>
+          <h4>Average {Math.round(props.chats.average)} messages</h4>
+          <h4>{props.ratio.conversation2match}% Turned Long</h4>
         </ContentArea>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: 'wrap',
-            // justifyContent: 'space-between'
-          }}
-        >
-          <div
-            className={styles.graphView} 
-            style={{
-              margin: "1rem",
-            }}
-          >
+          <div className={styles.graphView} >
             <RadarChart
               title="Number of messages"
               labels={props.chats.freq.map((_:any, i:number) => getHour(i))}
@@ -136,26 +136,8 @@ function MatchesResults(props: any) {
                   props.chats.freq.indexOf(Math.max(...props.chats.freq))
                 )}
               </b>
-              .
             </p>
           </div>
-          <PercentageFact isReversed={true}>
-            <h2>
-              {props.ratio.conversation2match}% of <br /> your Matches <br />{" "}
-              Turned Long
-              <br />
-              Conversations{" "}
-            </h2>
-          </PercentageFact>
-        </div>
-        <ContentArea isPurple title="Conversations Had" style={{ marginBottom: "18px" }}>
-          <h2>
-            {props.chats.total}, on average sending
-            <br />
-            {Math.round(props.chats.average)} messages <br />
-            per conversation
-          </h2>
-        </ContentArea> 
     </Container>
   )
 }
@@ -164,7 +146,7 @@ function DateResults(props: any) {
   return (
     <Container {...props} title={"Dates"}>
         <Result>
-          <h2 style={{ margin: 0 }}>{props.metUps.actualMet} Dates</h2>
+          <h3 style={{ margin: 0 }}>{props.metUps.actualMet} Dates</h3>
           <small>
              Last date was {moment(props.metUps.lastDate).fromNow()} ({moment(props.metUps.lastDate).format("MMMM Do, YYYY")})
           </small>
@@ -173,21 +155,62 @@ function DateResults(props: any) {
   )
 }
 
-export default function Results(props: any) {
-  function onDowload() {
+function getBlob(selector: string) {
     //@ts-ignore
-    html2canvas(document.querySelector("#hinge-likes"),
+  return html2canvas(document.querySelector(selector),
     {
       useCORS: true
     }
   
   ).then((canvas) => {
-      const link = document.createElement("a");
-      link.download = `hinge-wrapped.png`;
-      link.href = canvas.toDataURL();
+       return canvas.toDataURL()
+    })
+}
+
+const files = {
+  'hingle-data-general.png': '#hinge-general' ,
+  'hingle-data-likes.png': '#hinge-likes' ,
+  'hingle-data-matches.png': '#hinge-matches' ,
+  'hingle-data-conversations.png': '#hinge-conversations' ,
+  'hingle-data-dates.png': '#hinge-dates' ,
+}
+
+     async function onDownload(firstName: string) {
+      console.log("Downloaded started")
+      const ids = Object.values(files);
+
+      const fileBlobs = await Promise.allSettled(
+        ids.map((fileName) => getBlob(fileName))
+      ).then((results) =>
+        results
+          // .filter(({ status }) => status === "fulfilled")
+          //@ts-ignore
+          .map(({ value }) => value)
+      );
+      const zip = new JSZip();
+
+      const fileNames = Object.keys(files);
+      for (let i = 0; i < fileBlobs.length; i++) {
+        // Base64 string to blob
+        const file = await fetch(fileBlobs[i]).then(r => r.blob());
+        // save blobs to zip file
+        zip.file(`0${i}-${fileNames[i]}`, file);
+      }
+
+      const zipData =  await zip.generateAsync({
+        type: "blob",
+        streamFiles: true
+      })
+
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(zipData);
+      link.download = `${firstName}'s-hinge-data.zip`
       link.click();
-    });
-  }
+      console.log("Download done")
+    };
+
+export default function Results(props: any) {
+  //@ts-ignore
   return (
     <section
       style={{
@@ -201,15 +224,16 @@ export default function Results(props: any) {
         gap: '2rem'
       }}
       >
-      <GeneralResults {...props}/>
+      <GeneralResults {...props} id={"hinge-general"}/>
       <LikeResults {...props} id={"hinge-likes"}/>
-      {/* <MatchesResults {...props} />
-      <DateResults {...props}/> */}
+      <MatchResults {...props} id={"hinge-matches"}/>
+      <ConversationsResults {...props} id={"hinge-conversations"}/>
+      <DateResults {...props} id={"hinge-dates"}/>
       </div>
 
       <div className={styles.downloadButtonContainer} >
-        <Button onClick={onDowload} type="primary">
-          Download Image
+        <Button onClick={() => onDownload(props.first_name)} type="primary">
+          Download Results
         </Button>
       </div>
     </section>

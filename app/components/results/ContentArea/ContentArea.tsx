@@ -19,9 +19,9 @@ export default function ContentArea(props: PropsWithChildren<ContentAreaProps>) 
         ...props.style,
       }}
     >
-      <h2 className={styles.header} >
+      <h3 className={styles.header} >
         {props.title}
-      </h2>
+      </h3>
       <Numbers
         className={styles.result}
         isPurple={props.isPurple}
