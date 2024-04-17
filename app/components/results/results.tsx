@@ -1,4 +1,6 @@
-import { Button } from "antd";
+'use client'
+import React from "react";
+import { Spin, FloatButton } from "antd";
 import html2canvas from "html2canvas";
 import moment from "moment";
 import BarChart from "../charts/BarChart";
@@ -175,8 +177,9 @@ const files = {
   'hingle-data-dates.png': '#hinge-dates' ,
 }
 
-     async function onDownload(firstName: string) {
+     async function onDownload(firstName: string, setLoading : Function) {
       console.log("Downloaded started")
+      setLoading(true);
       const ids = Object.values(files);
 
       const fileBlobs = await Promise.allSettled(
@@ -207,34 +210,48 @@ const files = {
       link.download = `${firstName}'s-hinge-data.zip`
       link.click();
       console.log("Download done")
+      setLoading(false);
     };
 
 export default function Results(props: any) {
   //@ts-ignore
+  const [isLoading, setIsLoading] = React.useState(false);
   return (
     <section
       style={{
-        width: '100%'
+        width: "100%",
       }}
     >
+      <Spin spinning={isLoading} size="large" fullscreen />
       <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-        gap: '2rem'
-      }}
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "2rem",
+        }}
       >
-      <GeneralResults {...props} id={"hinge-general"}/>
-      <LikeResults {...props} id={"hinge-likes"}/>
-      <MatchResults {...props} id={"hinge-matches"}/>
-      <ConversationsResults {...props} id={"hinge-conversations"}/>
-      <DateResults {...props} id={"hinge-dates"}/>
+        <GeneralResults {...props} id={"hinge-general"} />
+        <LikeResults {...props} id={"hinge-likes"} />
+        <MatchResults {...props} id={"hinge-matches"} />
+        <ConversationsResults {...props} id={"hinge-conversations"} />
+        <DateResults {...props} id={"hinge-dates"} />
       </div>
 
-      <div className={styles.downloadButtonContainer} >
-        <Button onClick={() => onDownload(props.first_name)} type="primary">
-          Download Results
-        </Button>
+      <div className={styles.downloadButtonContainer}>
+        <FloatButton
+          onClick={() => onDownload(props.first_name, setIsLoading)}
+          type="primary"
+          shape="square"
+          description="Download Results"
+          style={{
+            width: '100%',
+            height: '80px',
+            fontWeight: 'bolder',
+            bottom: 0,
+            right: 0,
+            borderRadius: 0
+          }}
+          />
       </div>
     </section>
   );
