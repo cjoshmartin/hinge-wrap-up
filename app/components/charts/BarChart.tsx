@@ -28,24 +28,23 @@ interface BarInterface {
 
 export default function BarChart(props: BarInterface) {
   return (
-    <div
-      className="bar-chart-container"
-      style={{
-        // height: "500px",
-      }}
-    >
+    <div className="bar-chart-container" >
       <Bar
         data={{
           labels: props.labels, 
           datasets: [
             {
-              // axis: "x",
               data: props.data,
               backgroundColor: props.colors,
             },
           ],
         }}
+        // updateMode="resize"
+        // redraw={true}
+        height="250px"
         options={{
+          // responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             title: {
               display: !!props.title,
