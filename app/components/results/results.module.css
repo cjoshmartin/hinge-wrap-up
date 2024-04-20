@@ -31,12 +31,18 @@
     gap: 8px;
 }
 
-.downloadButtonContainer {
-          display: flex;
-          flex-direction: row;
-          /* margin: 18px; */
-          align-items: center;
-          justify-content: center;
-          padding: 1rem;
+.downloadBttn, .downloadBttn .ant-float-btn-body {
+    height: 80px !important;
+    width: 100px !important;
+    font-weight: 'bolder' !important;
+}
 
+@media (max-width: 700px) {
+    .downloadBttn, .downloadBttn .ant-float-btn-body {
+        width: 100% !important;
+        bottom: 0 !important;
+        right: 0 !important;
+        border-radius: 0 !important;
+        font-weight: 'bolder' !important;
+    }
 }

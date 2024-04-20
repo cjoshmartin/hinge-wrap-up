@@ -237,22 +237,13 @@ export default function Results(props: any) {
         <DateResults {...props} id={"hinge-dates"} />
       </div>
 
-      <div className={styles.downloadButtonContainer}>
         <FloatButton
           onClick={() => onDownload(props.first_name, setIsLoading)}
           type="primary"
           shape="square"
           description="Download Results"
-          style={{
-            width: '100%',
-            height: '80px',
-            fontWeight: 'bolder',
-            bottom: 0,
-            right: 0,
-            borderRadius: 0
-          }}
+          className={styles.downloadBttn}
           />
-      </div>
     </section>
   );
 }

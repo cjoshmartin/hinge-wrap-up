@@ -134,7 +134,11 @@ export default function Home() {
           </div>
         )}
 
-        <div style={{ maxWidth: "500px" }}>
+        <div className={styles.policies} style={{
+           maxWidth: "500px",
+           height: matchData ? "300px": "inital",
+           paddingTop: matchData ? "1rem" : "inital",
+           }}>
           <h2>Privacy Policy</h2>
           <p>
             No data from the content you upload is stored or collected anywhere.
