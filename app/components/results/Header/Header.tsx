@@ -34,7 +34,7 @@ export default function Header(props: HeaderProps) {
             marginBottom: "0",
           }}
         >
-          {props.username}'s Hinge Wrap {props.title && `- ${props.title}`}
+          {props.username}'s Hinge Trends {props.title && `- ${props.title}`}
         </h2>
 
         <div className={styles.datesContainer}>

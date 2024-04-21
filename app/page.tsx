@@ -58,47 +58,58 @@ function UploadForm({matchData, setMatchData}: any){
    }
 
    return (
-            <>
-          <div 
-          style={{ margin: "2rem 0" }}
-          >
-            <h2>A little Scared?</h2>
-            <div>
-              <p
-              style={{paddingBottom: '1rem'}}
-              >
-                look at my data first and see what it is like before you upload
-                yours...
-              </p>
-              <Button onClick={() => setMatchData(__data)}>
-                Check Out Josh&#39;s Hinge Wrapped
-              </Button>
-            </div>
-          </div>
-          <div>
-            <h2>Upload your Data</h2>
+     <>
+       <div style={{ margin: "2rem 0", maxWidth: '550px' }}>
+         <h2>A little Scared?</h2>
+         <p>Here is a youtube video I made about this application</p>
+         <div
+          style={{padding: '1rem'}}
+         >
+           <iframe
+             width="500"
+             height="315"
+             src="https://www.youtube.com/embed/53LIU9X-8Z0?si=5Y6dZHpY6VZqUgXr"
+             title="YouTube video player"
+             //@ts-ignore
+             frameborder="0"
+             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+             referrerpolicy="strict-origin-when-cross-origin"
+             allowfullscreen
+           ></iframe>
+         </div>
+         <div>
+           <p style={{ paddingBottom: "1rem" }}>
+             You can also look at my data first before uploading your own. by
+             clicking the button below:
+           </p>
+           <Button onClick={() => setMatchData(__data)}>
+             Check Out Josh&#39;s Hinge Trends
+           </Button>
+         </div>
+       </div>
+       <div>
+         <h2>Upload your Data</h2>
 
-            <Form onFinish={onSubmit}>
-              <Form.Item label="The date you started dating" name="startDate">
-                <DatePicker />
-              </Form.Item>
-              <Form.Item
-                label="Upload your hinge zip file:"
-                name="zip_file"
-                rules={[{ required: true }]}
-              >
-                <Input type="file" accept=".zip" onChange={onFileChange} />
-              </Form.Item>
-              <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
-              </Form.Item>
-            </Form> 
-          </div>
-        </>
-
-   )
+         <Form onFinish={onSubmit}>
+           <Form.Item label="The date you started dating" name="startDate">
+             <DatePicker />
+           </Form.Item>
+           <Form.Item
+             label="Upload your hinge zip file:"
+             name="zip_file"
+             rules={[{ required: true }]}
+           >
+             <Input type="file" accept=".zip" onChange={onFileChange} />
+           </Form.Item>
+           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+             <Button type="primary" htmlType="submit">
+               Submit
+             </Button>
+           </Form.Item>
+         </Form>
+       </div>
+     </>
+   );
 }
 
 
