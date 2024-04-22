@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ConfigProvider } from "antd";
+import Nav from "./components/Nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,7 +32,12 @@ export default function RootLayout({
               },
             }}
           >
-            {children}
+            <Nav />
+            <div
+              className="contentContainer"
+            >
+              {children}
+            </div>
             </ConfigProvider>
         </AntdRegistry>
       </body>

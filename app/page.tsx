@@ -7,6 +7,7 @@ import Nav from "./components/Nav";
 import styles from './page.module.css'
 
 import JSZip from "jszip";
+import Link from "next/link";
 
 function UploadForm({matchData, setMatchData}: any){
   const [file, setFile] = useState(null);
@@ -87,9 +88,10 @@ function UploadForm({matchData, setMatchData}: any){
            </Button>
          </div>
        </div>
-       <div>
+       <div style={{maxWidth: '550px'}}>
          <h2>Upload your Data</h2>
-
+          <p style={{padding: '1rem 0'}}>Read the following guide to understand how to get your hinge data from hinge. so that you can use this application to find the trends in your data: <Link href="/how-to-download">click here</Link></p>
+          <p style={{paddingBottom: '1rem'}}>Otherwise, if you already have your data you can fill out the form and see the results of your trends.</p>
          <Form onFinish={onSubmit}>
            <Form.Item label="The date you started dating" name="startDate">
              <DatePicker />
@@ -118,10 +120,6 @@ export default function Home() {
 
   return (
     <>
-      <Nav setMatchData={setMatchData} />
-      <div
-        className={styles.contentContainer}
-      >
         <UploadForm matchData={matchData} setMatchData={setMatchData} />
         {matchData && (
           <div
@@ -158,7 +156,6 @@ export default function Home() {
             you refresh the page.
           </p>
         </div>
-      </div>
     </>
   );
 }
