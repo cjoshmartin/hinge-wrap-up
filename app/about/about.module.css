@@ -1,0 +1,80 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 650px;
+
+
+}
+
+.container h2 {
+    margin: 1rem;
+}
+
+@media (max-width: 650px) {
+    .container {
+        align-items: center;
+
+    }
+}
+
+
+.body {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+@media (max-width: 650px) {
+    .body {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 0;
+
+    }
+}
+
+
+.leftHandContainer p {
+    margin: 1rem 0;
+}
+
+.profileImageContainer {
+    border-radius: 20%;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+
+.profileImage {
+    object-fit: cover;
+    top: -120px;
+    position: absolute;
+
+}
+
+.iconContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 1rem 0.5rem;
+}
+
+@media (max-width: 650px) {
+    .iconContainer {
+        margin-left: 5rem;
+    }
+}
+.iconCommpoent {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.icon {
+    font-size: 1.5rem !important;
+}

@@ -9,9 +9,9 @@ export default function Nav({setMatchData}: any) {
       <Menu.Item key="Home">
         <a href="/">Home</a>
       </Menu.Item>
-      {/* <Menu.Item key={"About"}>
+      <Menu.Item key={"About"}>
         <Link href="/about">About</Link>
-      </Menu.Item> */}
+      </Menu.Item>
       <Menu.Item key={'download'}>
         <Link href="/how-to-download">How to download Your Data</Link>
       </Menu.Item>
