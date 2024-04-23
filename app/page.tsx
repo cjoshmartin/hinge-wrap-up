@@ -1,5 +1,5 @@
 'use client';
-import { Button, DatePicker, Form, Input } from "antd";
+import { Alert, Button, DatePicker, Form, Input } from "antd";
 import { useState } from "react";
 import Results from "./components/results";
 import __data from "../lib/sample_data.json";
@@ -11,6 +11,7 @@ import Link from "next/link";
 
 function UploadForm({matchData, setMatchData}: any){
   const [file, setFile] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   const onFileChange = (event: any) => {
     if (event.target.files && event.target.files[0]) {
@@ -20,6 +21,8 @@ function UploadForm({matchData, setMatchData}: any){
   };
   const onSubmit = async (event: any) => {
     // more files !
+    let errorMessage = null;
+    setError(null);
     if (!file){
       return
     }
@@ -39,33 +42,45 @@ function UploadForm({matchData, setMatchData}: any){
       }
       
     })
+    .catch((e: any) => errorMessage = e.message)
+
+    if(errorMessage) {
+      setError(errorMessage);
+      return
+    }
 
     const body = JSON.stringify({
       startDate: event.startDate,
       ...data,
     });
+
     const response = await fetch("/api/upload", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body,
-    }).then((res) => res.json());
-    setMatchData(response.data);
+    }).then((res) => res.json())
+    .catch((e: any) => errorMessage = e.message)
+
+    if(errorMessage) {
+      setError(errorMessage);
+      return
+    }
+
+    setMatchData(response.data)
     // localStorage.setItem('matchData', JSON.stringify(response.data));
-  };
+  }
    if (matchData) {
     return null;
    }
 
    return (
      <>
-       <div style={{ margin: "2rem 0", maxWidth: '550px' }}>
+       <div style={{ margin: "2rem 0", maxWidth: "550px" }}>
          <h2>A little Scared?</h2>
          <p>Here is a youtube video I made about this application</p>
-         <div
-          style={{padding: '1rem'}}
-         >
+         <div style={{ padding: "1rem" }}>
            <iframe
              width="500"
              height="315"
@@ -88,10 +103,24 @@ function UploadForm({matchData, setMatchData}: any){
            </Button>
          </div>
        </div>
-       <div style={{maxWidth: '550px'}}>
+       <div style={{ maxWidth: "550px" }}>
          <h2>Upload your Data</h2>
-          <p style={{padding: '1rem 0'}}>Read the following guide to understand how to get your hinge data from hinge. so that you can use this application to find the trends in your data: <Link href="/how-to-download">click here</Link></p>
-          <p style={{paddingBottom: '1rem'}}>Otherwise, if you already have your data you can fill out the form and see the results of your trends.</p>
+
+         {(error ?? "").length > 0 && <Alert
+           message="Error"
+           description={error}
+           type="error"
+           style={{marginTop: '1rem'}}
+         />}
+         <p style={{ padding: "1rem 0" }}>
+           Read the following guide to understand how to get your hinge data
+           from hinge. so that you can use this application to find the trends
+           in your data: <Link href="/how-to-download">click here</Link>
+         </p>
+         <p style={{ paddingBottom: "1rem" }}>
+           Otherwise, if you already have your data you can fill out the form
+           and see the results of your trends.
+         </p>
          <Form onFinish={onSubmit}>
            <Form.Item label="The date you started dating" name="startDate">
              <DatePicker />
