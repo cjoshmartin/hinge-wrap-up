@@ -13,7 +13,7 @@ export default function Nav({setMatchData}: any) {
         <Link href="/about">About</Link>
       </Menu.Item>
       <Menu.Item key={'download'}>
-        <Link href="/how-to-download">How to download Your Data</Link>
+        <Link href="/how-to-download">Preparing Your Data</Link>
       </Menu.Item>
     </Menu>
   );
